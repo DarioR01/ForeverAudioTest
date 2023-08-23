@@ -1,5 +1,8 @@
 import express, { Request, Response } from "express";
-import playlistMiddleware from "../api/middlewares/playlistMiddleware";
+import {
+  playlistPostMiddleware,
+  playlistGetMiddleware,
+} from "../api/middlewares/playlistMiddleware";
 import PlaylistController from "../api/controllers/PlaylistController";
 const router = express.Router();
 
@@ -10,13 +13,13 @@ const playlistController = new PlaylistController();
  */
 router.post(
   "/",
-  playlistMiddleware,
+  playlistPostMiddleware,
   playlistController.create.bind(playlistController)
 );
 
 router.get(
   "/:id",
-  // playlistGetValidationMiddleware,
+  playlistGetMiddleware,
   playlistController.get.bind(playlistController)
 );
 
