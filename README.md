@@ -55,3 +55,7 @@ Get playlist endpoint has been implemented, it can be accessed via a GET request
 | Parameter | Type     | Description                                             |
 | :-------- | :------- | :------------------------------------------------------ |
 | `id`      | `number` | **Required**. An integer value between 1 and 2147483647 |
+
+#### Considerations and TO DOs
+
+I wanted to also add a rate limiter to avoid brute force attacks on the GET /playlists/:id by using the [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) as suggested in [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html#prevent-brute-force-attacks-against-authorization).
