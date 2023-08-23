@@ -1,5 +1,6 @@
 import { pool } from "../../config/database";
 import { PlaylistDetailsI, PlaylistRequestI } from "../interfaces/playlists";
+import StatusError from "../../utilities/StatusError";
 
 export default class PlaylistModel {
   /**
@@ -22,7 +23,7 @@ export default class PlaylistModel {
 
       return results.insertId;
     } catch (err: any) {
-      throw new Error("Failed to save a new playlist.");
+      throw new StatusError("Failed to save a new playlist.", 500);
     }
   }
 
@@ -42,9 +43,15 @@ export default class PlaylistModel {
         JSON.parse(JSON.stringify(results))
       );
 
+      if (!formattedResults[0])
+        throw new StatusError(
+          "Playlist with id: ${id} could not be found",
+          404
+        );
+
       return formattedResults[0];
     } catch (err: any) {
-      throw new Error("Failed to get a playlist by given ID value.");
+      throw err;
     }
   }
 }

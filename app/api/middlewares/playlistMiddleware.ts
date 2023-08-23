@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { PlaylistRequestI } from "../interfaces/playlists";
+import StatusError from "../../utilities/StatusError";
 
 /**
  * Playlist generator validator
@@ -33,14 +34,16 @@ function validatePlaylistDetails(
   characterLimit: number = 100
 ): void {
   if (!content) {
-    throw new Error(
-      `Invalid Request. Given value: ${content} for ${paramKey} is invalid`
+    throw new StatusError(
+      `Invalid Request. Given value: ${content} for ${paramKey} is invalid`,
+      400
     );
   }
 
   if (content.length > characterLimit) {
-    throw new Error(
-      `Invalid Request. Value for ${paramKey} is exceeds maximum character limit of ${characterLimit}`
+    throw new StatusError(
+      `Invalid Request. Value for ${paramKey} is exceeds maximum character limit of ${characterLimit}`,
+      400
     );
   }
 }
@@ -59,22 +62,27 @@ export const playlistGetMiddleware = (
 
     /* throws an error if id is not a number*/
     if (isNaN(Number(id))) {
-      throw new Error(`Invalid Request. Value:${id} for id is not a number`);
+      throw new StatusError(
+        `Invalid Request. Value:${id} for id is not a number`,
+        400
+      );
     }
 
     const intId: number = parseInt(id);
 
     /* throws an error if id is not an integer*/
     if (!Number.isInteger(intId)) {
-      throw new Error(
-        `Invalid Request. Value: ${intId} for id is not an integer value`
+      throw new StatusError(
+        `Invalid Request. Value: ${intId} for id is not an integer value`,
+        400
       );
     }
 
     /* throws an error if id is not in the range of INT Autoincrement as for https://dev.mysql.com/doc/refman/8.0/en/integer-types.html*/
     if (intId < 1 || intId > 2147483647) {
-      throw new Error(
-        `Invalid Request. Value:${id} for id is not in range 1 <= id <= 2147483647`
+      throw new StatusError(
+        `Invalid Request. Value:${id} for id is not in range 1 <= id <= 2147483647`,
+        400
       );
     }
 
