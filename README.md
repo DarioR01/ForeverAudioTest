@@ -43,3 +43,15 @@ Create a playlist endpoint has been implemented, it can be accessed via a POST r
 | :------------ | :------- | :--------------------------------- |
 | `title`       | `string` | **Required**. Playlist Title       |
 | `description` | `string` | **Required**. Playlist Description |
+
+#### Get a playlist
+
+Get playlist endpoint has been implemented, it can be accessed via a GET request method. See Below details
+
+```
+  GET /playlists/:id
+```
+
+| Parameter | Type     | Description                                             |
+| :-------- | :------- | :------------------------------------------------------ |
+| `id`      | `number` | **Required**. An integer value between 1 and 2147483647 |
