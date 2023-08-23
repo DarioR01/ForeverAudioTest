@@ -9,9 +9,15 @@ const playlistController = new PlaylistController();
  * Create a new playlist in the database
  */
 router.post(
-	"/",
-	playlistMiddleware,
-	playlistController.create.bind(playlistController)
+  "/",
+  playlistMiddleware,
+  playlistController.create.bind(playlistController)
+);
+
+router.get(
+  "/:id",
+  // playlistGetValidationMiddleware,
+  playlistController.get.bind(playlistController)
 );
 
 export default router;
