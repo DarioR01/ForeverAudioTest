@@ -1,0 +1,12 @@
+NODE_ENV="development"
+
+# ExpressJS Port
+PORT="8000"
+
+# Database Connection details
+DB_HOST="127.0.0.1"
+DB_USER="root"
+DB_PASSWORD="root"
+DB_NAME="test_db"
+DB_PORT="3306"
+DB_CONNECTION_LIMIT="100"
